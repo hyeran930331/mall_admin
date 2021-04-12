@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "gdu.mall.vo.*" %>
 <%@ page import = "gdu.mall.dao.*" %>
+<%@ page import = "gdu.mall.util.*" %>
 <%@ page import="java.util.*" %>
 
 <!DOCTYPE html>
@@ -54,7 +55,6 @@
     
     
     <div class="site-navbar-wrap">
-      
       <div class="site-navbar site-navbar-target js-sticky-header">
         <div class="container">
           <div class="row align-items-center">
@@ -62,8 +62,8 @@
               <h1 class="my-0 site-logo"><a href="<%=request.getContextPath()%>/adminIndex.jsp">Mail<span class="text-primary">.</span>book</a></h1>
             </div>
 		       <!-- include -->
-		        <div class="col-8 col-md-8 mb-5 t-14">
-				</div>
+		    <div class="col-8 col-md-8 mb-5 t-14">
+			</div>
           </div>
         </div>
       </div>
@@ -72,6 +72,7 @@
 	  <!-- 1로그인 + 2manager level=0 -->
 	  <!-- 1로그인 -->
 	  <div class="site-blocks-cover" id="home-section">
+	      
 	      <div class="img-wrap">
 	        <div class="owl-carousel slide-one-item hero-slider">
 	          <div class="slide">
@@ -85,6 +86,7 @@
 	          </div>
 	        </div>
 	      </div>
+	      
 	      <div class="container">
 	        <div class="row">
 	          <div class="col-md-6 ml-auto align-self-center">
@@ -93,6 +95,7 @@
 	              <div class="heading">
 	                <h1>매일<span class="text-primary">.</span>북</h1>
 	              </div>
+	              
 	              <div class="text">
 	                <h3>Mail을 이용해 책을 <br>어디서든 매일 book</h3>
 	              	<br>
@@ -125,9 +128,10 @@
 	    </div> <!-- END .site-blocks-cover -->
 	    
 	    <!-- 2manager level=0 -->
-	    <div class="site-section bg-light" id="manager_level=0">
-	      <div class="container">
-	         <div class="row mb-5 ">
+		<div class="site-section bg-light" id="manager_level=0">
+		<div class="container">
+			
+			<div class="row mb-5 ">
 	          <div class="col-md-7 section-title text-center mx-auto">
 	            <span class="sub-title mb-2 d-block">manager_level = 0</span>
 	            <h2 class="title text-primary mb-3">승인대기 목록</h2>
@@ -137,38 +141,39 @@
 	      	<div class="row">
 		      <%
 		      //public static ArrayList<Manager> selectManagerListByZero()
-		     //ArrayList<Manager> list = ManagerDao.selectManagerListByZero();
+		     ArrayList<Manager> manager = ManagerDao.selectManagerListByZero();
               %>
 				
-			  <%
-			  //이미지가 3,4만 쓰고싶어서
-			  	int c = 0;
-			 	int i = 0;
-				//for(Manager mm0: list){
+			<%
+			//이미지가 3,4만 쓰고싶어서
+			int c = 0;
+			int i = 0;
+			for(Manager man: manager){
 				c += 1;
 				i = (c%2)+3;
-			  %>
-		        <!-- 리스트 -->
-		        <div class="col-lg-6 mb-4">
-		         <div class="testimonial bg-white h-100">
-		          <div class="d-flex align-items-center vcard">
-		            <figure class="mb-0 mr-3">
+			%>
+			<!-- 리스트 -->
+				<div class="col-lg-6 mb-4">
+				<div class="testimonial bg-white h-100">
+				<div class="d-flex align-items-center vcard">
+					<figure class="mb-0 mr-3">
 		        	  <img src="images/person_<%=i%>.jpg" alt="Image" class="img-fluid ounded-circle">
 		            </figure>
-		          <div class="vcard-text">
-		            <span class="d-block">mm0.getManagerId()%></span>
-		            <span class="position">mm0.getManagerDate()%></span>
-		          </div>
-		         </div>
+					<div class="vcard-text">
+			            <span class="d-block"><%=man.getManagerId()%></span>
+			            <span class="position"><%=man.getManagerDate()%></span>
+					</div>
+				</div>
 		        </div>
-		       </div>
-		       <%
-				//}
-			   %>
-		       
-		        </div> <!-- row -->
-		      </div> <!-- container -->
-		    </div> <!-- site session-->
+				</div>
+			<%
+			}
+			%>  
+			</div> <!-- row -->
+			
+		</div> <!-- container -->
+		</div> <!-- site session-->
+		
    </div>
    
    <% 
